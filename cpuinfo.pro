@@ -4,7 +4,7 @@ QT += qml quick
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    Cpuinfo.cpp
+    cpuinfo.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,4 +15,4 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    Cpuinfo.h
+    cpuinfo.h

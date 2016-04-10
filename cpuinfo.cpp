@@ -1,4 +1,4 @@
-#include "Cpuinfo.h"
+#include "cpuinfo.h"
 
 #include <QDebug>
 #include <QFile>
@@ -18,8 +18,10 @@ QStringList Cpuinfo::cpuinfoList()
 void Cpuinfo::readFile()
 {
     QString procCpuInfo = "/proc/cpuinfo";
-//    QFile file(procCpuInfo);
-    QFile file("/Users/Asia/Workspace/cpuinfo/cpuinfo.txt");
+//    QString procCpuInfo = "/Users/Asia/Workspace/cpuinfo/cpuinfo.txt";
+//    QString procCpuInfo = "/home/am/Workspace/cpuinfo/cpuinfo.txt";
+
+    QFile file(procCpuInfo);
     qDebug() << "readFile: " << file.fileName();
 
     if ( !file.open(QIODevice::ReadOnly | QIODevice::Text) ) {
@@ -28,8 +30,11 @@ void Cpuinfo::readFile()
     }
 
     QTextStream in(&file);
-    while (!in.atEnd()) {
-        QString line = in.readLine();
+    QString line = in.readLine();
+    while (!line.isNull()) {
         mCpuinfoList.append(line);
+        line = in.readLine();
     }
+    file.close();
+    qDebug() << "QStringList count: " << mCpuinfoList.count();
 }

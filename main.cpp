@@ -2,7 +2,7 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 
-#include "Cpuinfo.h"
+#include "cpuinfo.h"
 
 int main(int argc, char *argv[])
 {
