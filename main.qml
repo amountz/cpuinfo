@@ -18,10 +18,35 @@ Window {
                 anchors.centerIn: parent
                 model: cpuinfo.cpuinfoList
                 TableViewColumn {
-                    title: model.modelData
                 }
             }
         }
+        Repeater {
+            model: cpuinfo.numProcessors
+            Tab {
+                title: "Proc " + index;
+                anchors.fill: parent
+                TableView {
+                    anchors.centerIn: parent
+                    model: cpuinfo.getCpuinfoMap(index)
+                    TableViewColumn {
+                        title: "key"
+                        role: "key"
+                        delegate: Text {
+                            text: "key"
+                        }
+                    }
+                    TableViewColumn {
+                        title: "value"
+                        role: "value"
+                        delegate: Text {
+                            text: "value"
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
 }

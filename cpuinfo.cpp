@@ -15,6 +15,12 @@ QStringList Cpuinfo::cpuinfoList()
     return mCpuinfoList;
 }
 
+QVariantMap Cpuinfo::getCpuinfoMap(int processor)
+{
+    qDebug() << "Return map for processor " << processor;
+    return mCpuinfoListOfMaps[processor];
+}
+
 void Cpuinfo::readFile()
 {
     QString procCpuInfo = "/proc/cpuinfo";
@@ -32,11 +38,10 @@ void Cpuinfo::readFile()
     QTextStream in(&file);
     QString line = in.readLine();
 
-    QStringList splitText;
-    QMap<QString, QString> map;
+    QMap<QString, QVariant> map;
 
     while (!line.isNull()) {
-        splitText = line.split(":",QString::SkipEmptyParts);
+        QStringList splitText = line.split(":",QString::SkipEmptyParts);
 
         if (splitText.length() > 0) {
             QString key = splitText.at(0).trimmed();
@@ -64,6 +69,6 @@ void Cpuinfo::readFile()
     }
     file.close();
 
-    qDebug() << "number of processors: " << mCpuinfoListOfMaps.length();
+    qDebug() << "number of processors: " << mCpuinfoListOfMaps.count();
     qDebug() << "QStringList count: " << mCpuinfoList.count();
 }
