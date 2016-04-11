@@ -1,6 +1,8 @@
 #ifndef CPUINFO_H
 #define CPUINFO_H
 
+#include <QList>
+#include <QMap>
 #include <QObject>
 #include <QStringList>
 
@@ -21,6 +23,7 @@ private:
     void readFile();
 
     QStringList mCpuinfoList;
+    QList <QMap<QString, QString>> mCpuinfoListOfMaps;
 };
 
 #endif // CPUINFO_H
