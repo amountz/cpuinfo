@@ -15,10 +15,55 @@ QStringList Cpuinfo::cpuinfoList()
     return mCpuinfoList;
 }
 
+QStringList Cpuinfo::processorKeyList()
+{
+    QStringList procKeyList;
+
+    foreach( QString key, mCpuinfoListOfMaps[mProcIndex].keys() )
+        procKeyList.append(key);
+
+    return procKeyList;
+}
+
+QStringList Cpuinfo::processorValueList()
+{
+    QStringList procValueList;
+
+    foreach( QString key, mCpuinfoListOfMaps[mProcIndex].keys() )
+        procValueList.append( mCpuinfoListOfMaps[mProcIndex].value(key).toString());
+
+    return procValueList;
+}
+
+QVariantMap Cpuinfo::cpuinfoMap()
+{
+    return mCpuinfoListOfMaps[mProcIndex];
+}
+
 QVariantMap Cpuinfo::getCpuinfoMap(int processor)
 {
     qDebug() << "Return map for processor " << processor;
     return mCpuinfoListOfMaps[processor];
+}
+
+void Cpuinfo::setProcIndex(int index)
+{
+    qDebug() << "mProcIndex =" << index;
+    mProcIndex = index;
+}
+
+int Cpuinfo::numProcessors() {
+    return mCpuinfoListOfMaps.count();
+}
+
+QString Cpuinfo::numCores()
+{
+    return mCpuinfoListOfMaps[0].value("cpu cores").toString();
+}
+
+QString Cpuinfo::cpuModelName()
+{
+    return mCpuinfoListOfMaps[0].value("model name").toString();
 }
 
 void Cpuinfo::readFile()
